@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="box1">
+    <ul>
+        <li v-for="value in arr">
+            {{value}}
+        </li>
+    </ul>
+</div>
+<hr>
+<div id="box2">
+    <ul>
+        <li v-for="value in json">
+            {{value}}
+            <!--2.3.2版本相较于1.x版本，已经没有了 {{$index}} 索引 和  {{$key}} 会报错-->
+        </li>
+    </ul>
+</div>
+<div id="box3">
+    <ul>
+        <li v-for="(item, index) in json">
+            key: {{index}}
+            value: {{item}}
+            <!-- 用这种形式来展现key与value 也有 1.x版本有差别，1.x版本中
+                v-for="(k,v) in json"
+
+                key: {{k}}
+                value: {{v}}
+            感觉是相反的。慎用-->
+        </li>
+    </ul>
+</div>
+<script src="https://unpkg.com/vue@2.3.2/dist/vue.js"></script>
+<script>
+    window.onload = function () {
+        var a = new Vue({
+            el: '#box1',
+            data: {
+                arr: ['苹果', '香蕉', '橙子', '西瓜']
+            }
+        });
+        var b = new Vue({
+            el: '#box2',
+            data: {
+                json: {a: '苹果', b: '香蕉', c: '橙子', d: '西瓜'}
+            }
+        });
+        var c = new Vue({
+            el: '#box3',
+            data: {
+                json: {a: '苹果', b: '香蕉', c: '橙子', d: '西瓜'}
+            }
+        })
+    }
+</script>
+</body>
+</html>
