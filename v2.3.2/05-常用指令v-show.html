@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="box1">
+    v-show的使用
+    <input type="button" value="点击隐藏div" v-on:click="seen = false">
+    <div style="width: 100px;height: 100px;background: #ff0000;" v-show="seen"></div>
+</div>
+<hr>
+<div id="box2">
+    v-if的使用
+    <input type="button" value="点击隐藏div" v-on:click="seen = false">
+    <div style="width: 100px;height: 100px;background: #ff0000;" v-if="seen"></div>
+</div>
+<hr>
+<p>
+    v-if 条件判断，不满足条件的话则不会出现在dom中 <br>
+    v-show 是否显示，不管满不满足条件均会在dom中，若不满足条件，则会设置成隐藏 display:none
+</p>
+<script src="https://unpkg.com/vue@1.0.0/dist/vue.js"></script>
+<script>
+    window.onload = function () {
+        var a = new Vue ({
+            el: '#box1',
+            data: {
+                seen: true
+            }
+        })
+        var b = new Vue ({
+            el: '#box2',
+            data: {
+                seen: true
+            }
+        })
+    }
+</script>
+</body>
+</html>
