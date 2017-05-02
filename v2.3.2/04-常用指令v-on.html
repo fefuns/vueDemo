@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="box1">
+    <input type="button" value="点击弹1" v-on:click="show">
+</div>
+<hr>
+<!-- 貌似click="" 里面加不加()都可以 官网2.0文档没有加 -->
+<div id="box2">
+    <input type="button" value="点击添加梨子" v-on:click="add()">
+    <ul>
+        <li v-for="value in arr">
+            {{value}}
+        </li>
+    </ul>
+</div>
+<!-- 另外:click  也可以是别的事件  :mouseover :mouserdown :dblclick 等等 -->
+<script src="https://unpkg.com/vue@2.3.2/dist/vue.js"></script>
+<script>
+    window.onload = function () {
+        var a = new Vue({
+            el: '#box1',
+            methods: {
+                show: function () {
+                    alert(1);
+                }
+            }
+        });
+        var b = new Vue({
+            el: '#box2',
+            data: {
+                arr: ['苹果', '香蕉', '橙子']
+            },
+            methods: {
+                add: function () {
+                    this.arr.push('梨子')
+                }
+            }
+
+        })
+    }
+</script>
+</body>
+</html>

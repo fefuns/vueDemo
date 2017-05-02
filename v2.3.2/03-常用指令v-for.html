@@ -26,12 +26,14 @@
         <li v-for="(item, index) in json">
             key: {{index}}
             value: {{item}}
-            <!-- 用这种形式来展现key与value 也有 1.x版本有差别，1.x版本中
+            <!--
+            用这种形式来展现key与value 也有 1.x版本有差别，1.x版本中
                 v-for="(k,v) in json"
 
                 key: {{k}}
                 value: {{v}}
-            感觉是相反的。慎用-->
+                恰好是相反的
+            -->
         </li>
     </ul>
 </div>
