@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="box1">
+    {{msg}}
+</div>
+<script src="https://unpkg.com/vue@2.3.2/dist/vue.js"></script>
+<script>
+    window.onload = function () {
+        var a = new Vue({
+            el: '#box1',
+            data: {
+                msg: 'welcome vue'
+            }
+        });
+    }
+</script>
+</body>
+</html>
