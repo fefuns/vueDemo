@@ -7,27 +7,41 @@
 <body>
 <div id="box1">
     <ul>
-        <li v-for="value in arr">
-            {{value}}
+        <li v-for="item in arr">
+            <!--A-{{$index}}-->
+            <!--B-{{$key}}-->
+            C-{{item}}
         </li>
     </ul>
 </div>
 <hr>
 <div id="box2">
     <ul>
-        <li v-for="value in json">
-            {{value}}
-            <!--2.3.2版本相较于1.x版本，已经没有了 {{$index}} 索引 和  {{$key}} 会报错-->
+        <li v-for="(item, index) in arr">
+            索引-{{index}}
+            值1-{{item.a}}
+            值2-{{item.b}}
         </li>
     </ul>
 </div>
+<hr>
 <div id="box3">
     <ul>
+        <li v-for="value in json">
+            <!--A-{{$index}}-->
+            <!--B-{{$key}}-->
+            C-{{value}}
+            <!--2.3.2版本相较于1.x版本， 删除了两个隐式变量{{$index}} 索引 和  {{$key}}-->
+        </li>
+    </ul>
+</div>
+<div id="box4">
+    <ul>
         <li v-for="(item, index) in json">
-            key: {{index}}
-            value: {{item}}
+            key-{{index}}
+            value-{{item}}
             <!--
-            用这种形式来展现key与value 也有 1.x版本有差别，1.x版本中
+            用这种形式来展现key与value 也有 1.2.6版本有差别，1.x版本中
                 v-for="(k,v) in json"
 
                 key: {{k}}
@@ -37,7 +51,7 @@
         </li>
     </ul>
 </div>
-<script src="https://unpkg.com/vue@2.3.2/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/vue/2.3.2/vue.min.js"></script>
 <script>
     window.onload = function () {
         var a = new Vue({
@@ -49,11 +63,22 @@
         var b = new Vue({
             el: '#box2',
             data: {
-                json: {a: '苹果', b: '香蕉', c: '橙子', d: '西瓜'}
+                arr: [
+                    {a: '苹果', b: '香蕉'},
+                    {a: '苹果', b: '橙子'},
+                    {a: '苹果', b: '西瓜'},
+                    {a: '苹果', b: '梨子'},
+                ]
             }
         });
         var c = new Vue({
             el: '#box3',
+            data: {
+                json: {a: '苹果', b: '香蕉', c: '橙子', d: '西瓜'}
+            }
+        });
+        var d = new Vue({
+            el: '#box4',
             data: {
                 json: {a: '苹果', b: '香蕉', c: '橙子', d: '西瓜'}
             }
