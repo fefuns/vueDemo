@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件进阶</title>
+</head>
+<body>
+<div id="box1">
+    <h2>基础事件</h2>
+    <input type="button" value="点击弹1" v-on:click="show">
+</div>
+<hr>
+<div id="box2">
+    <h2>事件简写  v-on:click --> @click</h2>
+    <input type="button" value="点击弹1" @click="show">
+</div>
+<hr>
+<div id="box3">
+    <h2>事件对象 $event</h2>
+    <input type="button" value="点击弹事件target" @click="show($event)">
+</div>
+<hr>
+<div id="box4">
+    <h2>事件冒泡 .stop</h2>
+    <div @click="show2">
+        <input type="button" value="点击会冒泡" @click="show">
+    </div>
+    <h4>原生方式阻止冒泡 $event.cancelBubble = true</h4>
+    <div @click="show4()">
+        <input type="button" value="原生阻止冒泡" @click="show3($event)">
+    </div>
+    <h4>vue方式阻止冒泡 .stop</h4>
+    <div @click="show2">
+        <input type="button" value="vue阻止冒泡" @click.stop="show">
+    </div>
+</div>
+<hr>
+<div id="box5">
+    <h2>阻止默认事件 .prevent</h2>
+    <input type="button" value="没有屏蔽右键的按钮" @contextmenu="show">
+    <h4>原生方式阻止默认事件 $event.preventDefault()</h4>
+    <input type="button" value="原生屏蔽浏览器右键菜单" @contextmenu="show2($event)">
+    <h4>vue方式阻止默认事件 .prevent</h4>
+    <input type="button" value="vue屏蔽浏览器右键菜单" @contextmenu.prevent="show3()">
+</div>
+<h2 style="color: #ff0000;">
+    .stop, .prevent在vue中被称为 事件修饰符。此类型的还有 <br>
+    .capture [表示添加事件侦听器时使用事件捕获模式] <br>
+    .self [只当事件在该元素本身（而不是子元素）触发时触发回调] <br>
+    另外在2.1.4以上还新增了一个 .once [事件将只会触发一次]
+</h2>
+<script src="https://cdn.bootcss.com/vue/2.3.2/vue.min.js"></script>
+<script>
+    window.onload = function () {
+        var a = new Vue({
+            el: '#box1',
+            data: {},
+            methods: {
+                show: function () {
+                    alert(1);
+                }
+            }
+        });
+        var b = new Vue({
+            el: '#box2',
+            data : {},
+            methods: {
+                show: function () {
+                    alert(1);
+                }
+            }
+        });
+        var c = new Vue({
+            el: '#box3',
+            data : {},
+            methods: {
+                show: function (e) {
+                    alert(e.target);
+                }
+            }
+        })
+        var d = new Vue({
+            el: '#box4',
+            data : {},
+            methods: {
+                show: function () {
+                    alert(1);
+                },
+                show2: function () {
+                    alert(2);
+                },
+                show3: function (e) {
+                    e.cancelBubble = true;
+                    alert(3);
+                },
+                show4: function () {
+                    alert(4);
+                }
+            }
+        });
+        var e = new Vue({
+            el: '#box5',
+            data: {},
+            methods: {
+                show: function () {
+                    alert(1);
+                },
+                show2: function (e) {
+                    e.preventDefault();
+                    alert(2);
+                },
+                show3: function (e) {
+                    alert(3);
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>
