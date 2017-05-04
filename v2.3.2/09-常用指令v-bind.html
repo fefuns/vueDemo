@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-bind绑定属性</title>
+</head>
+<style>
+    .white {
+        color: #ffffff;
+    }
+    .black {
+        background: #000000;
+    }
+</style>
+<body>
+<h2>在vue中，属性用v-bind 来绑定。比如 v-bind:src  v-bind:width  v-bind:title等</h2>
+<div id="box1">
+    <!--<img src="{{url}}" alt=""><br>-->
+    <img v-bind:src="url" alt=""><br>
+    简写方式
+    <img :src="url" alt="" :width="width" :title="title"><br>
+    <!--在1.x中，还可以用src="{{url}}"的方式来显示图片，只是会报404错误，-->
+    <!--但是在2.1 以上, 这种方式已经彻底不管用了。注意不需要{{}}了-->
+</div>
+<hr>
+<h2>两个特殊的属性绑定  v-bind:class  v-bind:style</h2>
+<div id="box2">
+    <h4>第一种方式：数组形式传递多个data字段</h4>
+    <p :class="[txtWhite, bgBlack]">这段话将是白色的,背景是黑色的</p>
+    <h4>第二种方式：json形式传多个类名</h4>
+    <p :class="{white:true, black:true}">这段话将是白色的,背景是黑色的</p>
+    <h4>第三种方式，官方推荐直接放json</h4>
+    <p :class="classJson">这段话将是白色的,背景是黑色的</p>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.3.2/vue.min.js"></script>
+<script>
+    window.onload = function () {
+        var a = new Vue({
+            el: '#box1',
+            data: {
+                url: 'https://www.baidu.com/img/bd_logo1.png',
+                width: '200px',
+                title: '这是百度logo'
+            }
+        });
+        var b = new Vue({
+            el: '#box2',
+            data: {
+                txtWhite: 'white',
+                bgBlack: 'black',
+                classJson: {
+                    white: true,
+                    black: true
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>
