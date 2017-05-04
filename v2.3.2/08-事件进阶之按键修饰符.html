@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>按键修饰符</title>
+</head>
+<body>
+<div id="box1">
+    <input type="text" @keyup="show($event)" placeholder="按下一个键会弹出该键的keyCode"><br>
+    <input type="text" @keyup.enter="enter" placeholder="按下回车键的时候会弹窗"> <br>
+    类似.enter的 还有.tab, .delete, .esc, .space, .up, .down, .left, .right <br>
+    在2.0.1中新增了  .ctrl, .alt, .shift, .meta(win键) <br>
+    经过自己实践 .tab, .ctrl, .alt, .shift, .meta并不那么好使，可能是跟系统的一些功能冲突了吧
+</div>
+<script src="https://cdn.bootcss.com/vue/2.3.2/vue.min.js"></script>
+<script>
+    window.onload = function () {
+        var a = new Vue({
+            el: '#box1',
+            data: {},
+            methods: {
+                show: function (e) {
+                    alert(e.keyCode);
+                },
+                enter: function () {
+                    alert('您按了回车键')
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>
