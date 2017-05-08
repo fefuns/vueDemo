@@ -5,17 +5,23 @@
     <title>vue模板语法</title>
 </head>
 <body>
-<h2>获取服务器文本数据</h2>
+<h2>get方式获取服务器文本数据</h2>
 <div id="box1">
     <input type="button" value="按钮" @click="get">
 </div>
 <hr>
-<h2>给服务器发送数据</h2>
+<h2>get方式给服务器发送数据</h2>
 <div id="box2">
-
+    <input type="button" value="求和" @click="get">
+    <!-- 这里貌似跟版本有所差异，如果是引用的1.3.1的vue-resource会报错 -->
 </div>
-<script src="https://cdn.bootcss.com/vue/1.0.2/vue.min.js"></script>
-<script src="https://cdn.bootcss.com/vue-resource/1.3.1/vue-resource.min.js"></script>
+<hr>
+<h2>post方式给服务器发送数据</h2>
+<div id="box3">
+    <input type="button" value="求差" @click="post">
+</div>
+<script src="https://cdn.bootcss.com/vue/2.3.2/vue.min.js"></script>
+<script src="https://cdn.bootcss.com/vue-resource/0.7.0/vue-resource.min.js"></script>
 <script>
     window.onload = function () {
         var a = new Vue({
@@ -23,7 +29,7 @@
             data: {},
             methods: {
                 get: function () {
-                    this.$http.get('11.txt').then(function (res) {
+                    this.$http.get('11-get.txt').then(function (res) {
                         // 请求成功，相当于jquery中ajax的success
                         alert(res.data);
                     }, function (res) {
@@ -37,15 +43,36 @@
             el: '#box2',
             data: {},
             methods: {
-                get: function () {
-                    this.$http.get('11.txt').then(function (res) {
-                        // 请求成功，相当于jquery中ajax的success
+                get:function () {
+                    this.$http.get('11-get.php',{
+                        a:1,
+                        b:2
+                    }).then(function (res) {
                         alert(res.data);
-                    }, function (res) {
-                        // 请求失败, 相当于jquery中ajax的error
+                    },function (res) {
                         alert(res.status);
                     });
                 }
+
+            }
+        });
+        var c = new Vue({
+            el: '#box3',
+            data: {},
+            methods: {
+                post:function () {
+                    this.$http.post('11-post.php',{
+                        a:1,
+                        b:2
+                    }, {
+                        emulateJSON: true
+                    }).then(function (res) {
+                        alert(res.data);
+                    },function (res) {
+                        alert(res.status);
+                    });
+                }
+
             }
         });
     }
