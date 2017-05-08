@@ -25,11 +25,11 @@
 <hr>
 <h2>两个特殊的属性绑定  v-bind:class  v-bind:style</h2>
 <div id="box2">
-    <h4>第一种方式：数组形式传递多个data字段</h4>
+    <h4>第一种方式：数组语法</h4>
     <p :class="[txtWhite, bgBlack]">这段话将是白色的,背景是黑色的</p>
-    <h4>第二种方式：json形式传多个类名</h4>
+    <h4>第二种方式：对象语法</h4>
     <p :class="{white:true, black:true}">这段话将是白色的,背景是黑色的</p>
-    <h4>第三种方式，官方推荐直接放json</h4>
+    <h4>第三种方式，直接绑定数据里的对象</h4>
     <p :class="classJson">这段话将是白色的,背景是黑色的</p>
 </div>
 <script src="https://cdn.bootcss.com/vue/2.3.2/vue.min.js"></script>
