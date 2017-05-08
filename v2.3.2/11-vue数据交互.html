@@ -20,6 +20,16 @@
 <div id="box3">
     <input type="button" value="求差" @click="post">
 </div>
+<hr>
+<h2>jsonp方式给服务器发送数据1</h2>
+<div id="box4">
+    <input type="button" value="获取好搜搜a展示的关键字结果" @click="jsonp">
+</div>
+<hr>
+<h2>jsonp方式给服务器发送数据2</h2>
+<div id="box5">
+    <input type="button" value="获取百度搜a展示的关键字结果" @click="jsonp">
+</div>
 <script src="https://cdn.bootcss.com/vue/2.3.2/vue.min.js"></script>
 <script src="https://cdn.bootcss.com/vue-resource/0.7.0/vue-resource.min.js"></script>
 <script>
@@ -68,6 +78,41 @@
                         emulateJSON: true
                     }).then(function (res) {
                         alert(res.data);
+                    },function (res) {
+                        alert(res.status);
+                    });
+                }
+
+            }
+        });
+        var d = new Vue({
+            el: '#box4',
+            data: {},
+            methods: {
+                jsonp:function () {
+                    this.$http.jsonp('https://sug.so.360.cn/suggest', {
+                        word: 'a'
+                    }).then(function (res) {
+                        alert(res.data.s);
+                    },function (res) {
+                        alert(res.status);
+                    });
+                }
+
+            }
+        });
+        var e = new Vue({
+            el: '#box5',
+            data: {},
+            methods: {
+                jsonp:function () {
+                    this.$http.jsonp('https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su', {
+                        wd: 'a'
+                    }, {
+                        // 默认是callback,但是百度不同，是自己定义的一个cb函数，所以这里也需要对应的修改下
+                        jsonp: 'cb'
+                    }).then(function (res) {
+                        alert(res.data.s);
                     },function (res) {
                         alert(res.status);
                     });
