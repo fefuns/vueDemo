@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue模板语法</title>
+</head>
+<body>
+<h2>文本双向实时绑定，一次绑定</h2>
+<div id="box1">
+    <input type="text" v-model="msg">
+    <br>
+    <h4>这里将会根据input框内容实时变化: </h4>
+    <span>{{msg}}</span>
+    <br>
+    <h4>这里不会根据input框实时变化（数据只绑定一次）:</h4>
+    <span v-once>{{msg}}</span>
+    <!--在1.x的版本中，是通过{{*msg}}来使其不会根据input框实时变化，2.x中有所改变。-->
+    <br>
+</div>
+<hr>
+<h2>绑定html</h2>
+<div id="box2">
+    <input type="text" v-model="rawHtml">
+    <br>
+    <div v-html="rawHtml"></div>
+    <!-- 在1.x的版本中，是通过{{{msg}}} 三个花括号的形式来绑定html， 2.x中有所改变 -->
+</div>
+<script src="https://cdn.bootcss.com/vue/2.3.2/vue.min.js"></script>
+<script>
+    window.onload = function () {
+        var a = new Vue({
+            el: '#box1',
+            data: {
+                msg: '基础模板语法',
+            }
+        });
+        var b = new Vue({
+            el: '#box2',
+            data: {
+                rawHtml: '<h3>这是一个h3标签包起来的内容</h3>'
+            }
+        });
+    }
+</script>
+</body>
+</html>
