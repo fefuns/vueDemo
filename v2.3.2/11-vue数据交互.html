@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue模板语法</title>
+</head>
+<body>
+<h2>获取服务器文本数据</h2>
+<div id="box1">
+    <input type="button" value="按钮" @click="get">
+</div>
+<hr>
+<h2>给服务器发送数据</h2>
+<div id="box2">
+
+</div>
+<script src="https://cdn.bootcss.com/vue/1.0.2/vue.min.js"></script>
+<script src="https://cdn.bootcss.com/vue-resource/1.3.1/vue-resource.min.js"></script>
+<script>
+    window.onload = function () {
+        var a = new Vue({
+            el: '#box1',
+            data: {},
+            methods: {
+                get: function () {
+                    this.$http.get('11.txt').then(function (res) {
+                        // 请求成功，相当于jquery中ajax的success
+                        alert(res.data);
+                    }, function (res) {
+                        // 请求失败, 相当于jquery中ajax的error
+                        alert(res.status);
+                    });
+                }
+            }
+        });
+        var b = new Vue({
+            el: '#box2',
+            data: {},
+            methods: {
+                get: function () {
+                    this.$http.get('11.txt').then(function (res) {
+                        // 请求成功，相当于jquery中ajax的success
+                        alert(res.data);
+                    }, function (res) {
+                        // 请求失败, 相当于jquery中ajax的error
+                        alert(res.status);
+                    });
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>
