@@ -25,7 +25,15 @@
     <div v-html="rawHtml"></div>
     <!-- 在1.x的版本中，是通过{{{msg}}} 三个花括号的形式来绑定html， 2.x中有所改变 -->
 </div>
-<script src="https://cdn.bootcss.com/vue/2.3.2/vue.min.js"></script>
+<br>
+<h2>过滤器</h2>
+<div id="box3">
+    {{msg | uppercase}}
+    <br>
+    <!-- 在1.x中，uppercase (小写转大写)， lowercase(大写转小写)，capitalize(首字母大写)，currency(数字转金钱)是vue自带的常用的过滤器，可以直接通过 {{msg | uppercase}}的方式来实现这种转换成大写，但是2.x中废弃了这些自带的过滤器，都得自己在filter里面写相应的转换函数-->
+    {{'msg' | uppercase}}
+</div>
+<script src="https://cdn.bootcss.com/vue/1.0.2/vue.min.js"></script>
 <script>
     window.onload = function () {
         var a = new Vue({
@@ -40,6 +48,19 @@
                 rawHtml: '<h3>这是一个h3标签包起来的内容</h3>'
             }
         });
+        var c = new Vue({
+            el: '#box3',
+            data: {
+                msg: 'welcome'
+            },
+            filters: {
+                uppercase: function (value) {
+                    if (!value) return ''
+                    value = value.toString()
+                    return value.toUpperCase()
+                }
+            }
+        })
     }
 </script>
 </body>
