@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue百度搜索框</title>
+</head>
+<style>
+    .grey {
+        background: grey;
+    }
+</style>
+<body>
+<div id="box">
+    <input type="text" v-model="t1" @keyup="get($event)" @keydown.down="changeDown()" @keydown.up.prevent="changeUp()">
+    <ul>
+        <li v-for="(item, index) in myData" :class="{grey: index==now}">
+            {{item}}
+        </li>
+    </ul>
+    <p v-if="myData.length==0">暂无数据</p>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.3.2/vue.min.js"></script>
+<script src="https://cdn.bootcss.com/vue-resource/0.7.0/vue-resource.min.js"></script>
+<script>
+    window.onload = function () {
+        var a = new Vue({
+            el: '#box',
+            data: {
+                myData: [],
+                t1: '',
+                now: -1
+            },
+            methods: {
+                get: function (e) {
+                    if (e.keyCode == 38 || e.keyCode == 40) {
+                        return;
+                    }
+                    if (ev.keyCode == 13) {
+                        window.open('https://www.baidu.com/s?wd=' + this.t1);
+                        this.t1 = '';
+                    }
+                    this.$http.jsonp('https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su', {
+                        wd: this.t1
+                    }, {
+                        jsonp: 'cb'
+                    }).then(function (res) {
+                        this.myData = res.data.s
+                    }, function () {
+
+                    })
+                },
+                changeDown: function () {
+                    this.now++;
+                    if (this.now == this.myData.length) {
+                        this.now = -1;
+                    }
+                    this.t1 = this.myData[this.now];
+                },
+                changeUp: function () {
+                    this.now--;
+                    if (this.now == -2) {
+                        this.now = this.myData.length - 1;
+                    }
+                    this.t1 = this.myData[this.now];
+                }
+
+            }
+        })
+    }
+</script>
+</body>
+</html>
