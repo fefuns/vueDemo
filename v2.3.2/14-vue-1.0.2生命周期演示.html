@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="box1">
+    {{msg}}
+</div>
+<script src="https://cdn.bootcss.com/vue/1.0.2/vue.min.js"></script>
+<script>
+    window.onload = function () {
+        var vm = new Vue({
+            el: '#box1',
+            data: {
+                msg: 'vue生命周期演示',
+            },
+            created: function () {
+                alert('实例已经创建');
+            },
+            beforeCompile: function () {
+                alert('编译之前');
+            },
+            compiled: function () {
+                alert('编译之后');
+            },
+            ready: function () {
+                alert('插入到文档中');
+            },
+            beforeDestroy: function () {
+                alert('销毁之前');
+            },
+            destroyed: function () {
+                alert('销毁之后');
+            }
+        });
+
+        document.onclick = function () {
+            vm.$destroy();
+        }
+    }
+
+</script>
+</body>
+</html>
