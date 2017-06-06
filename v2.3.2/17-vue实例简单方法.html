@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="box1">
+    {{a}}
+</div>
+<hr>
+<div id="box2">
+    手动挂载  vm.$mount
+    <br>
+    {{a}}
+</div>
+<hr>
+<div id="box3">
+    访问自定义属性  vm.$options
+    <br>
+    点击我会执行自定义show方法
+</div>
+<script src="https://cdn.bootcss.com/vue/2.3.2/vue.min.js"></script>
+<script>
+    window.onload = function () {
+        var vm1 = new Vue({
+            el: '#box1',
+            data: {
+                a: 1
+            }
+        });
+
+        console.log(vm1.$el);           // 指 div#box1 这个对象
+        vm1.$el.style.background = '#f00';
+
+        console.log(vm1.$data);          // vm1 中的 原始数据对象 data   vm1.$data.a === vm.a
+
+        var vm2 = new Vue({
+            data: {
+                a: 1
+            }
+        }).$mount('#box2');
+
+        var vm3 = new Vue({
+            el: '#box3',
+            show: function () {
+                alert('a');
+            }
+        });
+
+        vm3.$el.onclick = function () {
+            vm3.$options.show();
+        }
+    }
+</script>
+</body>
+</html>
