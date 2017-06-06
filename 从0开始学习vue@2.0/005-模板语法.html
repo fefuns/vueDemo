@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>处理用户输入</title>
+</head>
+<body>
+相关文档：<br>
+<ul>
+    <li><a href="https://vuefe.cn/v2/guide/syntax.html">模板语法</a></li>
+</ul>
+<hr>
+
+<h2>插值（v-text, v-html, v-bind, 使用javascript表达式）</h2>
+<div id="app1">
+    <span>{{ msg }}</span>
+</div>
+<hr>
+<script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
+<script>
+    var vm1 = new Vue({
+        el: '#app1',
+        data: {
+            msg: '插入文本',
+        }
+    });
+</script>
+</body>
+</html>

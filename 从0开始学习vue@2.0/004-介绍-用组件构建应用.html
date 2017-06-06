@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>处理用户输入</title>
+</head>
+<body>
+相关文档：<br>
+<ul>
+    <li><a href="https://vuefe.cn/v2/guide/index.html#用组件构建（应用）">用组件构建应用</a></li>
+    <li><a href="https://vuefe.cn/v2/api/#Vue-component">Vue-component</a></li>
+</ul>
+<hr>
+
+<h2>Vue.component简介</h2>
+<div id="app1">
+    <ol>
+        <todo-item v-for="item in itemList" v-bind:todo="item"></todo-item>
+    </ol>
+</div>
+<hr>
+<script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
+<script>
+    // 注册组件，传入选项对象（自动调用Vue.extend）
+    // 自定义组件 todo-item 相当于是自定义的标签名，props 中的  todo 相当于是自定义的属性名, template 中的 <li></li> 则是最终会替换掉 todo-item标签的元素
+    Vue.component('todo-item', {
+        props: ['todo'],
+        template: '<li>{{ todo.text }}</li>'
+    })
+
+    var vm1 = new Vue({
+        el: '#app1',
+        data: {
+            itemList: [
+                {text: 'html,css,js基础'},
+                {text: 'vue基础'},
+                {text: '前端工程化/构建工具'},
+                {text: 'vue进阶'}
+            ]
+        }
+    });
+</script>
+</body>
+</html>
