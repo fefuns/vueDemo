@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>class与style绑定</title>
+</head>
+<body>
+相关文档：<br>
+<ul>
+    <li><a href="https://cn.vuejs.org/v2/guide/class-and-style.html">class与style绑定</a></li>
+</ul>
+<hr>
+
+<h1>绑定HTML Class</h1>
+<h2>对象语法</h2>
+<div id="app1" class="a" :class="{ b: isB, c: isC }">
+    是否给#app1  添加 class   b ， c  取决于 isB, isC的值是否为true
+</div>
+<hr>
+<div id="app2" class="a" :class="classObj">
+    绑定class的对象语法第二种用法(推荐用法)
+</div>
+<hr>
+<h2>数组语法</h2>
+<div id="app3" :class="[clsA, clsB, clsC]">
+    数组语法绑定class
+</div>
+<hr>
+
+<h1>绑定内敛样式  style</h1>
+<h2>对象语法</h2>
+<div id="app4" :style="{ color: dColor, fontSize: dFontSize + 'px', backgroundColor: dBgColor }">
+    绑定style 与 绑定 class 差不多，css属性名  可以用驼峰式，也能用 中划线的方式   比如上面写的   fontSize  background-color
+</div>
+<div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }"></div>
+<script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
+<script>
+    var vm1 = new Vue({
+        el: '#app1',
+        data: {
+            isB: true,
+            isC: true
+        }
+    });
+    var vm2 = new Vue({
+        el: '#app2',
+        data: {
+            classObj: {
+                b: true,
+                c: true
+            }
+        }
+    });
+
+    var vm3 = new Vue({
+        el: '#app3',
+        data: {
+            clsA: 'a',
+            clsB: 'b',
+            clsC: 'c'
+        }
+    });
+
+    var vm4 = new Vue({
+        el: '#app4',
+        data: {
+            dColor: 'red',
+            dFontSize: 30,
+            dBgColor: '#0c0'
+        }
+    });
+</script>
+</body>
+</html>
