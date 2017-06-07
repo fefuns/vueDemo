@@ -14,16 +14,66 @@
 <h2>插值（v-text, v-html, v-bind, 使用javascript表达式）</h2>
 <div id="app1">
     <span>{{ msg }}</span>
+    <span v-text="msg"></span>
+    <div v-html="rawHtml" v-bind:id="eId"></div>
+    <span>{{ msg + '啊' }}</span>
+    <!--在1.x的版本中，是通过{{{rawHtml}}} 三个花括号的形式来绑定html， 2.x中有所改变-->
 </div>
 <hr>
+
+<h2>参数，修饰符</h2>
+<div id="app2" v-bind:href="url" v-on:click="doSomething">
+    v-bind: 后的  href为参数，告知 v-bind 指令将该元素的 href 属性与表达式 url 的值绑定。<br>
+    v-on:click 后的 doSomething 也叫参数，指监听的事件名
+    <form v-on:submit.prevent="onSubmit">
+        .prevent 为修饰符，v-on指令对于处罚的submit事件调用  event.preventDefault();
+    </form>
+</div>
+<hr>
+
+<h2>过滤器</h2>
+<div id="app3">
+    {{msg | uppercase}}
+    <br>
+    <!-- 在1.x中，uppercase (小写转大写)， lowercase(大写转小写)，capitalize(首字母大写)，currency(数字转金钱)是vue自带的常用的过滤器，可以直接通过 {{msg | uppercase}}的方式来实现这种转换成大写，但是2.x中废弃了这些自带的过滤器，都得自己在filter里面写相应的转换函数-->
+    {{'msg' | uppercase}}
+</div>
 <script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
 <script>
     var vm1 = new Vue({
         el: '#app1',
         data: {
             msg: '插入文本',
+            rawHtml: '<ul><li>插入html</li></ul>',
+            eId: 'testId'
         }
     });
+
+    var vm2 = new Vue({
+        el: '#app2',
+        data: {
+            url: 'https://cn.vuejs.org/v2/guide/syntax.html#指令'
+        },
+        methods: {
+            doSomething: function () {
+                alert(1);
+            }
+        }
+    });
+
+    var vm3 = new Vue({
+        el: '#app3',
+        data: {
+            msg: 'welcome'
+        },
+        filters: {
+            uppercase: function (value) {
+                if (!value) return ''
+                value = value.toString()
+                return value.toUpperCase()
+            }
+        }
+    })
 </script>
 </body>
 </html>
