@@ -27,12 +27,26 @@
 </div>
 <hr>
 
-<h1>绑定内敛样式  style</h1>
+<h1>绑定内联样式  style</h1>
 <h2>对象语法</h2>
-<div id="app4" :style="{ color: dColor, fontSize: dFontSize + 'px', backgroundColor: dBgColor }">
-    绑定style 与 绑定 class 差不多，css属性名  可以用驼峰式，也能用 中划线的方式   比如上面写的   fontSize  background-color
+<div id="app4" :style="{ color: dColor, 'font-size': dFontSize + 'px', backgroundColor: dBgColor}">
+    <p>绑定style 与 绑定 class 差不多，css属性名  可以用驼峰式，也能用 中划线的方式   比如上面写的   font-size  backgroundColor</p>
 </div>
-<div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }"></div>
+<div id="app5" :style="styleObj">
+    :style=styleObj
+</div>
+<hr>
+
+<h2>数组语法</h2>
+<div id="app6" :style="[fontStyle, colorStyle]">
+    数组语法
+</div>
+<hr>
+
+<h2>多重值</h2>
+<div id="app7" :style="{ display: ['-webkit-box', '-webkit-flex', 'flex'] }">
+    2.3.0+ 支持。如果在已经支持 display: flex 的浏览器里，会只渲染成   display: flex。
+</div>
 <script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
 <script>
     var vm1 = new Vue({
@@ -68,6 +82,32 @@
             dFontSize: 30,
             dBgColor: '#0c0'
         }
+    });
+
+    var vm5 = new Vue({
+        el: '#app5',
+        data: {
+            styleObj: {
+                color: 'red',
+                fontSize: '30px'
+            }
+        }
+    });
+
+    var vm6 = new Vue({
+        el: '#app6',
+        data: {
+            fontStyle: {
+                fontSize: '30px'
+            },
+            colorStyle: {
+                color: '#f60'
+            }
+        }
+    });
+
+    var vm7 = new Vue({
+        el: '#app7'
     });
 </script>
 </body>
