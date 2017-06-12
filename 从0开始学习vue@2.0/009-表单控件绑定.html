@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单控件绑定</title>
+</head>
+<body>
+相关文档：<br>
+<ul>
+    <li><a href="https://cn.vuejs.org/v2/guide/forms.html">表单控件绑定</a></li>
+</ul>
+<hr>
+
+<h2>基础用法-单行文本</h2>
+<div id="app1">
+    <input type="text" v-model="message">
+    <p>{{ message }}</p>
+</div>
+<hr>
+<h2>多行文本</h2>
+<div id="app2">
+    <textarea name="" id="" cols="30" rows="10" v-model="message"></textarea>
+    <p style="white-space: pre">{{ message }}</p>
+</div>
+<hr>
+<h2>复选框</h2>
+<div id="app3">
+    <input type="checkbox" id="jack" value="jack" v-model="checkedNames">
+    <label for="jack">jack</label>
+    <input type="checkbox" id="john" value="john" v-model="checkedNames">
+    <label for="john">john</label>
+    <input type="checkbox" id="mike" value="mike" v-model="checkedNames">
+    <label for="mike">mike</label>
+    <p>选中的是 {{ checkedNames }} </p>
+</div>
+<hr>
+<h2>单选按钮</h2>
+<div id="app4">
+    <input type="radio" id="one" value="one" v-model="picked">
+    <label for="one">one</label>
+    <input type="radio" id="two" value="two" v-model="picked">
+    <label for="two">two</label>
+    <p>选中的是： {{ picked }}</p>
+</div>
+<hr>
+<h2>选择列表</h2>
+<div id="app5">
+    <select name="" id="" v-model="selected">
+        <option value="a">A</option>
+        <option value="b">B</option>
+        <option value="c">C</option>
+    </select>
+    <span>单选列表选中的是： {{ selected }}</span>
+    <br>
+    <br>
+
+    <select name="" id="" v-model="selectedArr" multiple>
+        <option value="d">D</option>
+        <option value="e">E</option>
+        <option value="f">F</option>
+    </select>
+    <span>多选列表选中的是： {{ selectedArr }}</span>
+    <br>
+    <br>
+    <select name="" id="" v-model="selectedFor">
+        <option v-for="item in options" :value="item.value">
+            {{ item.text }}
+        </option>
+    </select>
+    <span>动态列表选中的是： {{ selectedFor }}</span>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
+<script>
+    var vm1 = new Vue({
+        el: '#app1',
+        data: {
+            message: ''
+        }
+    });
+    var vm2 = new Vue({
+        el: '#app2',
+        data: {
+            message: ''
+        }
+    });
+    var vm3 = new Vue({
+        el: '#app3',
+        data: {
+            checkedNames: []
+        }
+    });
+    var vm4 = new Vue({
+        el: '#app4',
+        data: {
+            picked: ''
+        }
+    });
+    var vm5 = new Vue({
+        el: '#app5',
+        data: {
+            selected: null,
+            selectedArr: [],
+            selectedFor: '',
+            options: [
+                {text: 'A', value: 'a'},
+                {text: 'B', value: 'b'},
+                {text: 'C', value: 'c'}
+            ]
+        }
+    });
+</script>
+</body>
+</html>
