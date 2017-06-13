@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件-prop</title>
+</head>
+<body>
+相关文档：<br>
+<ul>
+    <li><a href="https://cn.vuejs.org/v2/guide/components.html#Prop">prop</a></li>
+</ul>
+<hr>
+<h2>使用prop传递数据</h2>
+<div id="app1">
+    <child my-message="hello!"></child>
+</div>
+<hr>
+<h2>动态prop</h2>
+<div id="app2">
+    <input type="text" v-model="parentMsg">
+    <br>
+    <child :my-message="parentMsg"></child>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
+<script>
+    Vue.component('child', {
+        // 声明 props
+        props: ['myMessage'],
+        // 就像 data 一样，prop 可以用在模板内
+        // 同样也可以在 vm 实例中像 'this.message' 这样调用
+        template: '<span>{{ myMessage }}</span>'
+    });
+    var vm1 = new Vue({
+        el: '#app1'
+    });
+
+    var vm2 = new Vue({
+        el: '#app2',
+        data: {
+            parentMsg: ''
+        }
+    })
+</script>
+</body>
+</html>
