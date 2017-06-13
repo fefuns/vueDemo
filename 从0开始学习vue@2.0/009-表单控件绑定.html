@@ -69,6 +69,19 @@
     </select>
     <span>动态列表选中的是： {{ selectedFor }}</span>
 </div>
+<hr>
+<div id="app6">
+    <p>修饰符 .lazy   如果不用则是  input 输入的时候  就会变化， 有.lazy 则是 change的时候 才会变化  </p>
+    <input type="text" v-model="msg">
+    <input type="text" v-model.lazy="msg">
+    <p>{{ msg }}</p>
+    <p>修饰符 .number </p>
+    <input type="number" v-model.number="age">
+    <p>{{ age }}</p>
+    <p>修饰符  .trim  过滤首尾空格(2017-06-13 好像没有也会去除空格？)</p>
+    <input type="text" v-model.tirm="msg2">
+    <p>{{ msg2 }}</p>
+</div>
 <script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
 <script>
     var vm1 = new Vue({
@@ -106,6 +119,15 @@
                 {text: 'B', value: 'b'},
                 {text: 'C', value: 'c'}
             ]
+        }
+    });
+
+    var vm6 = new Vue({
+        el: '#app6',
+        data: {
+            msg: '',
+            age: '',
+            msg2: ''
         }
     });
 </script>
