@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件-使用组件</title>
+</head>
+<body>
+相关文档：<br>
+<ul>
+    <li><a href="https://cn.vuejs.org/v2/guide/components.html#使用组件">使用组件</a></li>
+</ul>
+<hr>
+<h2>全局注册</h2>
+<div id="app1">
+    <global-component></global-component>
+</div>
+<hr>
+<h2>局部注册</h2>
+<div id="app2">
+    <local-component></local-component>
+</div>
+<h2>data 必须是函数。如果不是一个函数，那当该组件上绑定某个方法执行时，会影响其他地方调用的该组件</h2>
+<div id="app3">
+    <simple-counter></simple-counter>
+    <simple-counter></simple-counter>
+    <simple-counter></simple-counter>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
+<script>
+    Vue.component('global-component', {
+        template: '<div>这是一个全局组件</div>'
+    });
+
+    Vue.component('simple-counter', {
+        template: '<button @click="counter += 1">{{ counter }}</button>',
+        data: function () {
+            return {
+                counter: 0
+            }
+        }
+    })
+    var vm1 = new Vue({
+        el: '#app1'
+    });
+    var Child = {
+        template: '<div>这是一个局部组件</div>'
+    };
+    var vm2 = new Vue({
+        el: '#app2',
+        components: {
+            'local-component': Child
+        }
+    });
+
+    var vm3 = new Vue({
+        el: '#app3'
+    });
+</script>
+</body>
+</html>
