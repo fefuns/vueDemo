@@ -21,6 +21,12 @@
     <br>
     <child :my-message="parentMsg"></child>
 </div>
+<hr>
+<h2>单向数据流</h2>
+<p>
+    prop 是单向绑定的：当父组件的属性变化时，将传导给子组件，但是不会反过来。这是为了防止子组件无意修改了父组件的状态。<br>
+    另外，每次父组件更新时，子组件的所有 prop 都会更新为最新值。这意味着你不应该在子组件内部改变 prop 。如果你这么做了，Vue 会在控制台给出警告。 <br>
+    就好比：JavaScript的对象是引用类型数据，它的每一个属性都指向同一个内存空间，所以不同的变量引用同一个对象的话，其中一个的属性一改，另一个也会跟着改。父组件和子组件之间的prop也是一样，你修改子组件里面的prop，那么父组件里面的对应的属性也改了，这会让父组件或app层面产生混乱，一定会出bug。</p>
 <script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
 <script>
     Vue.component('child', {

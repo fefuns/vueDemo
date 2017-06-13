@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>过渡效果</title>
+</head>
+<style>
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s
+    }
+    .fade-enter, .fade-leave-active {
+        opacity: 0
+    }
+</style>
+<body>
+相关文档：<br>
+<ul>
+    <li><a href="https://cn.vuejs.org/v2/guide/transitions.html">过渡效果</a></li>
+</ul>
+<hr>
+<h2>css过渡</h2>
+<div id="app1">
+    <button @click="show = !show">
+        Toggle
+    </button>
+    <transition name="fade">
+        <p v-show="show">hello</p>
+    </transition>
+</div>
+<hr>
+<p>过渡的类名。v-enter  v-leave-active 为隐藏状态。v-enter-active v-levave 为显示状态。</p>
+<script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
+<script>
+    var vm1 = new Vue({
+        el: '#app1',
+        data: {
+            show: true
+        }
+    });
+</script>
+</body>
+</html>
