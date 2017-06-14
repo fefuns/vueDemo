@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动态路由匹配</title>
+</head>
+<body>
+相关文档: <br>
+<ul>
+    <li><a href="https://cn.vuejs.org/v2/guide/routing.html#官方路由">Vue官网路由章节</a></li>
+    <li><a href="https://router.vuejs.org/zh-cn/essentials/dynamic-matching.html">官方vue-router中文文档-动态路由匹配</a></li>
+    <li><a href="http://es6.ruanyifeng.com/">阮一峰ES6入门</a></li>
+    <li><a href="http://es6.ruanyifeng.com/#docs/let#const-命令">ES6 const命令简介</a></li>
+    <li><a href="http://www.tangshuang.net/3512.html#title-24-7">什么是router-link</a></li>
+    <li><a href="http://www.tangshuang.net/3512.html#title-24-3">什么是router-view</a></li>
+</ul>
+<br>
+<div id="app1">
+    <h1>Hello App!</h1>
+    <p>
+        <!-- 使用 router-link 组件来导航 -->
+        <!-- 通过传入 'to' 属性指定链接 -->
+        <!-- <router-link> 默认会被渲染成一个 '<a>' 标签 -->
+        <router-link to="/user/foo">/user/foo</router-link>
+        <router-link to="/user/bar">/user/bar</router-link>
+    </p>
+    <!-- 路由出口 -->
+    <!-- 路由匹配到的组件将渲染在这里 -->
+    <router-view></router-view>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
+<script src="https://cdn.bootcss.com/vue-router/2.5.3/vue-router.js"></script>
+<script>
+    // 0. 如果使用模块化机制编程，導入Vue和VueRouter，要调用 Vue.use(VueRouter)
+
+    // 1. 定义（路由）组件。
+    // 可以从其他文件 import 进来
+    const User = {template: '<div>User {{ $route.params.id }}</div>'}
+
+    // 2. 定义路由
+    // 每个路由应该映射一个组件。其中'component'可以是通过 Vue.extend() 创建的组件构造器，或者，只是一个组件配置对象。
+
+
+    // 3. 创建 router 实例，然后传 'router' 配置
+    // 还可以传别的配置参数
+    const router = new VueRouter({
+        routes: [
+            // 动态路径参数 以冒号开头
+            { path: '/user/:id', component: User }
+        ]
+    })
+
+    // 4. 创建和挂载根实例。
+    // 记得要通过 router 配置参数注入路由，
+    // 从而让整个应用都有路由功能
+    const app = new Vue({
+        router
+    }).$mount('#app1')
+
+    // 现在，应用已经启动了！
+</script>
+</body>
+</html>

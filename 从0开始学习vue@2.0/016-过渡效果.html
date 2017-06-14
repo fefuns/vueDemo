@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>过渡效果</title>
+    <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
 </head>
 <style>
     .fade-enter-active, .fade-leave-active {
@@ -10,6 +11,34 @@
     }
     .fade-enter, .fade-leave-active {
         opacity: 0
+    }
+    .bounce-enter-active {
+        animation: bounce-in .5s;
+    }
+    .bounce-leave-active {
+        animation: bounce-out .5s;
+    }
+    @keyframes bounce-in {
+        0% {
+            transform: scale(0);
+        }
+        50% {
+            transform: scale(1.5);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+    @keyframes bounce-out {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.5);
+        }
+        100% {
+            transform: scale(0);
+        }
     }
 </style>
 <body>
@@ -29,6 +58,29 @@
 </div>
 <hr>
 <p>过渡的类名。v-enter  v-leave-active 为隐藏状态。v-enter-active v-levave 为显示状态。</p>
+<h2>css动画</h2>
+<div id="app2">
+    <button @click="show = !show">
+        Toggle show
+    </button>
+    <transition name="bounce">
+        <p v-show="show">Look at me!</p>
+    </transition>
+</div>
+<hr>
+<h2>自定义过度类名 配合 animate.css使用更简便</h2>
+<div id="app3">
+    <button @click="show = !show">
+        Toggle render
+    </button>
+    <transition
+            name="custom-classes-transition"
+            enter-active-class="animated tada"
+            leave-active-class="animated bounceOutRight"
+    >
+        <p v-if="show">hello</p>
+    </transition>
+</div>
 <script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
 <script>
     var vm1 = new Vue({
@@ -37,6 +89,18 @@
             show: true
         }
     });
+    var vm2 = new Vue({
+        el: '#app2',
+        data: {
+            show: true
+        }
+    });
+    new Vue({
+        el: '#app3',
+        data: {
+            show: true
+        }
+    })
 </script>
 </body>
 </html>

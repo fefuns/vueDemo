@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>命名路由</title>
+</head>
+<body>
+相关文档: <br>
+<ul>
+    <li><a href="https://cn.vuejs.org/v2/guide/routing.html#官方路由">Vue官网路由章节</a></li>
+    <li><a href="https://router.vuejs.org/zh-cn/essentials/nested-routes.html">官方vue-router中文文档-嵌套路由</a></li>
+    <li><a href="http://es6.ruanyifeng.com/">阮一峰ES6入门</a></li>
+    <li><a href="http://es6.ruanyifeng.com/#docs/let#const-命令">ES6 const命令简介</a></li>
+    <li><a href="http://www.tangshuang.net/3512.html#title-24-7">什么是router-link</a></li>
+    <li><a href="http://www.tangshuang.net/3512.html#title-24-3">什么是router-view</a></li>
+</ul>
+<br>
+<div id="app1">
+    <p>
+        <router-link to="/user/foo">/user/foo</router-link>
+        <router-link to="/user/foo/profile">/user/foo/profile</router-link>
+        <router-link to="/user/foo/posts">/user/foo/posts</router-link>
+    </p>
+    <router-view></router-view>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
+<script src="https://cdn.bootcss.com/vue-router/2.5.3/vue-router.js"></script>
+<script>
+    const User = {
+        template: '<div class="user"><h2>User {{ $route.params.id }}</h2><router-view></router-view></div>'
+    }
+    const UserHome = {
+        template: '<div>Home</div>'
+    }
+    const UserProfile = {
+        template: '<div>Profile</div>'
+    }
+    const UserPosts = {
+        template: '<div>Posts</div>'
+    }
+
+    const router = new VueRouter({
+        routes: [
+            {
+                path: '/user/:id', component: User,
+                children: [
+                    {path: '', component: UserHome},
+                    {path: 'profile', component: UserProfile},
+                    {path: 'posts', component: UserPosts}
+                ]
+            }
+        ]
+    })
+
+    const app = new Vue({
+        router
+    }).$mount('#app1')
+</script>
+</body>
+</html>
