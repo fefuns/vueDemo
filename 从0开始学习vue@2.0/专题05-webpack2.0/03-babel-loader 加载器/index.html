@@ -6,27 +6,34 @@
 </head>
 <body>
 <ul>
-    <li><a href="http://www.cnblogs.com/xianrongbin/p/6486695.html?utm_source=itdadao&utm_medium=referral">使用babel-loader转换ES6代码</a></li>
-    <li><a href="https://www.npmjs.com/package/babel-loader">babel-loader用法</a></li>
+    <li><a href="https://doc.webpack-china.org/loaders/babel-loader/">babel-loader用法</a></li>
 </ul>
 <pre>
-    安装 babel-loader
+    1. 安装 babel-loader
     $ npm install babel-loader --save-dev
 
-    安装 babel-core
+    2. 安装 babel-core
     $ npm install babel-core --save-dev
 
-    安装转码规则
+    3. 安装转码规则
     $ npm install babel-preset-es2015
 
-    配置webpack.config.js
-    参考格式
-    {
-        test: /\.js$/,
-        loader: 'babel?presets[]=es2015'
-    }
+    4. 配置webpack.config.js
+    参考格式:
+    rules: [
+        {
+            test: /\.js$/,
+            exclude: /(node_modules | bower_components)/,
+            use: {
+                loader: 'babel-loader',
+                options: {
+                    presets: ['es2015']
+                }
+            }
+        }
+    ]
 
-    执行webpack命令
+    5. 执行webpack命令
     $ webpack
 </pre>
 <script src="bundle.js"></script>
