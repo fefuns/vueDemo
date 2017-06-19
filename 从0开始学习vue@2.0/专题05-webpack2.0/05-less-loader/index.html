@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .a {
+        display: flex;
+    }
+</style>
+<body>
+<ul>
+    <li><a href="https://doc.webpack-china.org/loaders/css-loader/">webpack@2.6.1-css-loader文档</a></li>
+</ul>
+<div class="a">测试兼容前缀</div>
+<div class="b">测试兼容前缀</div>
+<p>发现 style 包起来的样式不会被添加前缀，在 app.css 中的才行</p>
+<pre>
+    1. 安装 css-loader：
+    $ npm install css-loader  --save-dev
+
+    2. 安装 style-loader
+    $ npm install style-loader  --save-dev
+
+    3. 安装 autoprefixer-loader
+    $ npm install autoprefixer-loader --save-dev
+
+    4. 安装 less-loader (确保已安装less  $ npm install less --save-dev)
+    $ npm install less-loader --save-dev
+
+
+    4. 配置 webpack.config.js
+    参考格式：
+    rules: [
+        {
+            test: /\.css$/,
+            use: ['style-loader', 'css-loader', 'autoprefixer-loader', 'less-loader']
+        }
+    ]
+
+    5. 在当前目录执行 webpack 命令
+    $ webpack
+</pre>
+
+<script src="bundle.js"></script>
+</body>
+</html>
