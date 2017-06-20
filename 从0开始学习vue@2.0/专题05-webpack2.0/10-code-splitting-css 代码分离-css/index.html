@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+相关文档：
+<ul>
+    <li><a href="https://doc.webpack-china.org/guides/code-splitting/">了解代码分离的概念</a></li>
+    <li><a href="https://doc.webpack-china.org/guides/code-splitting-css/">代码分离css 文档</a></li>
+    <li><a href="https://doc.webpack-china.org/plugins/extract-text-webpack-plugin/">ExtractTextWebpackPlugin 文档</a></li>
+</ul>
+<p>ExtractTextWebpackPlugin 用于从 bundle 中提取文本（css）到分离的文件（styles.css）</p>
+<pre>
+    1. $ npm install --save-dev css-loader style-loader  实际上此例是在04-css-loader的基础上做优化处理，css-loader, style-loader 已经装过了，因此可以不用再装
+
+    2. $ npm install --save-dev extract-text-webpack-plugin
+
+    3. $ webpack
+</pre>
+<script src="bundle.js"></script>
+</body>
+</html>
