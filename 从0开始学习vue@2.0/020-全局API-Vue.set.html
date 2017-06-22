@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.set</title>
+</head>
+<body>
+相关文档：<br>
+<ul>
+    <li><a href="https://cn.vuejs.org/v2/api/#Vue-set">Vue.set</a></li>
+    <li><a href="http://note.youdao.com/noteshare?id=02979921854ccebd5150e942bd6202ff&sub=C8E3156DB47F4CC6835AC2B3EC7A7A41">Vue.set学习笔记</a></li>
+</ul>
+<hr>
+
+<div id="app1">
+    <ul>
+        <li v-for="aa in arr">{{ aa }}</li>
+    </ul>
+</div>
+<button onclick="add()">外部添加</button>
+<script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
+<script>
+    function add () {
+        console.log('我已经执行了');
+        vm1.arr[1] = 'ddd';
+        Vue.set(vm1.arr, 1, 'ddd');
+    }
+    var outData = {
+        arr: ['aaa', 'bbb', 'ccc']
+    };
+
+    var vm1 = new Vue({
+        el: '#app1',
+        data: outData
+    })
+</script>
+</body>
+</html>
