@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义指令</title>
+</head>
+<body>
+相关文档：<br>
+<ul>
+    <li><a href="https://cn.vuejs.org/v2/api/#Vue-extend">Vue.extend</a></li>
+</ul>
+<hr>
+<baidu></baidu>
+<div id="baidu"></div>
+<p>这样就可以在页面随便某处写一个 baidu 标签, 就会被渲染成 一个链接到百度的链接 </p>
+Vue.extend 返回的是一个“扩展实例构造器”,也就是预设了部分选项的Vue实例构造器。经常服务于Vue.component用来生成组件，可以简单理解为当在模板中遇到该组件名称作为标签的自定义元素时，会自动调用“扩展实例构造器”来生产组件实例，并挂载到自定义元素上。
+<script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
+<script>
+    // 自定义无参数标签
+    var baiduExtend = Vue.extend({
+        template: '<p><a :href="baiduUrl">{{ baiduName }}</a></p>',
+        data: function () {
+            return {
+                baiduUrl: 'http://www.baidu.com',
+                baiduName: '百度'
+            }
+        }
+    });
+    // 挂载到普通标签上
+    new baiduExtend().$mount('baidu');
+    // 推荐方式
+    new baiduExtend().$mount('#baidu');
+</script>
+</body>
+</html>
