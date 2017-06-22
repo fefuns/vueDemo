@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义指令</title>
+</head>
+<body>
+相关文档：<br>
+<ul>
+    <li><a href="https://cn.vuejs.org/v2/guide/custom-directive.html">自定义指令</a></li>
+</ul>
+<hr>
+<div id="app1">
+    <input type="text" v-focus>
+</div>
+<p>上例注册了一个全局自定义指令 v-focus。当页面加载时，元素将获得焦点</p>
+<hr>
+<h2>一个更全面的应用指令各项参数的自定义指令例子</h2>
+<div id="app2" v-demo:hello.a.b="message">
+</div>
+<hr>
+<h2>体验各种钩子函数的流程</h2>
+<div id="app3">
+    <div v-changecolor="color" id="a">
+        {{ num }}
+    </div>
+    <p>
+        <button @click="add">加分</button>
+    </p>
+    <p>
+        <button @click="unbind">解绑</button>
+    </p>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
+<script>
+    // 注册一个全局自定义指令  v-focus
+    Vue.directive('focus', {
+        // 当绑定元素插入到DOM中。
+        inserted: function (el) {
+            // 聚焦元素
+            el.focus();
+        }
+    })
+    var vm1 = new Vue({
+        el: '#app1'
+    })
+
+    // 注册一个全局自定义指令 v-demo
+    Vue.directive('demo', {
+        // bind 也是自定义指令的一个钩子函数。表示只调用一次，指令第一次绑定到元素时调用，用来定义一个在绑定时执行一次的初始化动作
+        // el 指令所绑定的元素，可以用来直接操作DOM
+        // binding: 一个对象包含指令的很多信息。
+        // vnode: Vue编译生成的虚拟节点
+        // bind 表示被绑定
+        bind: function (el, binding, vnode) {
+            var s = JSON.stringify
+            el.innerHTML =
+                'name:' + s(binding.name) + '<br>' +
+                'value:' + s(binding.value) + '<br>' +
+                'expression:' + s(binding.expression) + '<br>' +
+                'argument: '   + s(binding.arg) + '<br>' +
+                'modifiers: '  + s(binding.modifiers) + '<br>' +
+                'vnode keys: ' + Object.keys(vnode).join(', ');
+        }
+    })
+
+    var vm2 = new Vue({
+        el: '#app2',
+        data: {
+            message: 'hello'
+        }
+    })
+
+
+    Vue.directive('changecolor', {
+        bind: function (el, binding) {
+            el.style = 'color:' + binding.value;
+
+            console.log('1 - bind - 被绑定');
+        },
+        inserted: function () {
+            console.log('2 - inserted - 绑定到节点');
+        },
+        update: function () {
+            console.log('3 - update - 组件更新');
+        },
+        componentUpdated: function () {
+            console.log('4 - componentUpdated - 组件更新完成');
+        },
+        unbind: function () {
+            console.log('5 - unbind - 解绑');
+        }
+    });
+
+    var vm3 = new Vue({
+        el: '#app3',
+        data: {
+            color: 'green',
+            num: 0
+        },
+        methods: {
+            add: function () {
+                this.num++
+            },
+            unbind: function () {
+                this.$destroy();
+            }
+        }
+    })
+</script>
+</body>
+</html>
