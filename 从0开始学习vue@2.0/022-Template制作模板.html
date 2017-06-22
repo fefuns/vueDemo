@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue的生命周期</title>
+</head>
+<body>
+相关文档：<br>
+<ul>
+    <li><a href="https://cn.vuejs.org/v2/guide/instance.html#实例生命周期">实例生命周期</a></li>
+</ul>
+<hr>
+<h2>1. 直接写在选项里的模板</h2>
+<div id="app1">
+
+</div>
+<hr>
+<h2>2. 写在&lt;template&gt;标签里的模板</h2>
+<template id="app2">
+    <h2 style="color: red">我是template标签模板</h2>
+</template>
+<hr>
+<h2>3. 写在&lt;script&gt;标签里的模板</h2>
+<script type="x-template" id="app3">
+    <h2 style="color: red">我是script标签模板</h2>
+</script>
+<p>以后还会有 vue-cli的里的  .vue 文件模板的写法</p>
+<script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
+<script>
+    var vm1 = new Vue({
+        el: '#app1',
+        data: {
+            message: 'hello Vue!'
+        },
+        // 注意下面模板的标识不是单引号，是tab 上面的键 ` 。
+        template: `
+            <h1 style="color: red">我是选项模板</h1>
+        `
+    });
+    var vm2 = new Vue({
+        el: '#app2',
+        data: {
+            message: 'hello Vue!'
+        },
+        template: '#app2'
+    });
+
+    var vm2 = new Vue({
+        el: '#app3',
+        data: {
+            message: 'hello Vue!'
+        },
+        template: '#app3'
+    });
+</script>
+</body>
+</html>

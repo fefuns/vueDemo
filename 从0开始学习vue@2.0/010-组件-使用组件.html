@@ -31,18 +31,10 @@
     Vue.component('global-component', {
         template: '<div>这是一个全局组件</div>'
     });
-
-    Vue.component('simple-counter', {
-        template: '<button @click="counter += 1">{{ counter }}</button>',
-        data: function () {
-            return {
-                counter: 0
-            }
-        }
-    })
     var vm1 = new Vue({
         el: '#app1'
     });
+
     var Child = {
         template: '<div>这是一个局部组件</div>'
     };
@@ -53,6 +45,17 @@
         }
     });
 
+
+
+
+    Vue.component('simple-counter', {
+        template: '<button @click="counter += 1">{{ counter }}</button>',
+        data: function () {
+            return {
+                counter: 0
+            }
+        }
+    })
     var vm3 = new Vue({
         el: '#app3'
     });

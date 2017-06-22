@@ -22,7 +22,7 @@
 <script>
     function add () {
         console.log('我已经执行了');
-        vm1.arr[1] = 'ddd';
+        // vm1.arr[1] = 'ddd';   这样是不会改变的
         Vue.set(vm1.arr, 1, 'ddd');
     }
     var outData = {
