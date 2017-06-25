@@ -26,7 +26,19 @@
 <p>
     prop 是单向绑定的：当父组件的属性变化时，将传导给子组件，但是不会反过来。这是为了防止子组件无意修改了父组件的状态。<br>
     另外，每次父组件更新时，子组件的所有 prop 都会更新为最新值。这意味着你不应该在子组件内部改变 prop 。如果你这么做了，Vue 会在控制台给出警告。 <br>
-    就好比：JavaScript的对象是引用类型数据，它的每一个属性都指向同一个内存空间，所以不同的变量引用同一个对象的话，其中一个的属性一改，另一个也会跟着改。父组件和子组件之间的prop也是一样，你修改子组件里面的prop，那么父组件里面的对应的属性也改了，这会让父组件或app层面产生混乱，一定会出bug。</p>
+    就好比：JavaScript的对象是引用类型数据，它的每一个属性都指向同一个内存空间，所以不同的变量引用同一个对象的话，其中一个的属性一改，另一个也会跟着改。父组件和子组件之间的prop也是一样，你修改子组件里面的prop，那么父组件里面的对应的属性也改了，这会让父组件或app层面产生混乱，一定会出bug。
+</p>
+<hr>
+<h2>父子组件的嵌套关系</h2>
+<h3>1. 构造器外部写局部注册组件</h3>
+<p>如果组件代码量很大，会影响构造器的可读性，造成拖拉和错误。因此在项目中，经常会把组件编写的代码放到构造器外部或者单独文件中。</p>
+<div id="app3">
+    <panda></panda>
+</div>
+<h3>2. 父子嵌套的组件</h3>
+<div id="app4">
+    <parent></parent>
+</div>
 <script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
 <script>
     Vue.component('child', {
@@ -45,7 +57,36 @@
         data: {
             parentMsg: ''
         }
+    });
+
+    var pandaComponent = {
+        template: '<div style="color: red;">Panda from China!</div>'
+    };
+    var vm3 = new Vue({
+        el: '#app3',
+        components: {
+            'panda': pandaComponent
+        }
+    });
+
+    var childComponent = {
+        template: '<div>这是一个被父组件嵌套的子组件</div>'
+    };
+
+    var parentComponent = {
+        template: '<div><p>这是一个父组件</p><childa></childa></div>',
+        components: {
+            'childa': childComponent
+        }
+    }
+
+    var vm4 = new Vue({
+        el: '#app4',
+        components: {
+            'parent': parentComponent
+        }
     })
+
 </script>
 </body>
 </html>
