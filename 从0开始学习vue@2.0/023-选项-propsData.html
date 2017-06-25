@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>propsData Option</title>
+</head>
+<body>
+相关文档：<br>
+<ul>
+    <li><a href="https://cn.vuejs.org/v2/api/#propsData">propsData</a></li>
+</ul>
+<hr>
+<p>propsData 不是和属性有关，他用在全局扩展时进行传递数据。可以先回顾一下全局扩展的知识，作一个&lt;header&gt;&lt;/header&gt;的扩展标签出来。实际并不推荐用全局扩展的方式作自定义标签，我们学了组件，完全可以使用组件来做，这里只是为了演示propsData的用法。</p>
+<h2>回顾扩展标签 Vue.extend</h2>
+<header></header>
+
+<script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
+<script>
+    var headerA = Vue.extend({
+        template: '<p>{{ message }} - {{a}}</p>',
+        data: function () {
+            return {
+                message: 'Hello, I am headerA!'
+            }
+        },
+        props: ['a']
+    });
+
+    new headerA({propsData: {a: 10}}).$mount('header');
+</script>
+</body>
+</html>
