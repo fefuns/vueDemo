@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>minxins Option</title>
+</head>
+<body>
+相关文档：<br>
+<ul>
+    <li><a href="https://cn.vuejs.org/v2/guide/mixins.html">混合mixins</a></li>
+</ul>
+<hr>
+<p>
+    Mixins一般有两种用途：<br>
+
+    1、在你已经写好了构造器后，需要增加方法或者临时的活动时使用的方法，这时用混入会减少源代码的污染。<br>
+
+    2、很多地方都会用到的公用方法，用混入的方法可以减少代码量，实现代码重用。</p>
+
+<h2>1. Mixins的基本用法</h2>
+<p>假如已经有一个数字点击递增的程序了，这时希望每次数据变化时能在控制台打印提示：'数据发生变化'</p>
+<div id="app1">
+    <p>num: {{ num }}</p>
+    <p><button @click="add">增加数量</button></p>
+</div>
+<hr>
+<h2>2. mixins的调用顺序</h2>
+<p>从执行的先后顺序来说，都是混入的先执行，然后构造器里的再执行，需要注意的是，这并不是方法的覆盖，而是被执行了两遍。</p>
+<div id="app2">
+
+</div>
+<hr>
+<h2>3. 全局API混入方式</h2>
+<p>一般全局混入的时候是用于处理很多地方都会用到的公用方法，用这种方式可以减少代码量，实现代码重用。</p>
+<div id="app3">
+
+</div>
+<p>当全局混入，组件，混合对象都是同名选项的时候，全局混入最先执行，再是混入对象，最后才是组件里的</p>
+<script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
+<script>
+
+    Vue.mixin({
+        created: function () {
+            console.log('全局混合的钩子被调用');
+        }
+    })
+    // 额外临时加入时，用于显示日志
+    var addLog = {
+        updated: function () {
+            console.log('数据发生变化，变化成' + this.num + '.');
+        }
+    };
+
+    var vm1 = new Vue({
+        el: '#app1',
+        data: {
+            num: 1
+        },
+        methods: {
+            add: function () {
+                this.num++;
+            }
+        },
+        mixins: [addLog]
+    });
+
+    var mixinObj2 = {
+        created: function () {
+            console.log('混合对象的钩子被调用')
+        }
+    };
+
+    var vm2 = new Vue({
+        el: '#app2',
+        created: function () {
+            console.log('组件钩子被调用')
+        },
+        mixins: [mixinObj2]
+    });
+
+
+</script>
+</body>
+</html>
