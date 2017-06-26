@@ -2,9 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>组件-prop</title>
 </head>
 <body>
-
+相关文档：<br>
+<ul>
+    <li><a href="https://cn.vuejs.org/v2/guide/components.html#使用-Slot-分发内容">slot</a></li>
+</ul>
+<hr>
+<p>slot是标签的内容扩展，也就是说你用slot就可以在自定义组件时传递给组件内容，组件接收内容并输出。</p>
+<p>比如可以先定义一个&lt;blog&gt;&lt;/blog&gt;的组件，这个组件用来显示博主的一些信息。</p>
+<div id="app1">
+    <!-- 第三步： 在HTML的组件中使用slot属性传递值 -->
+    <blog>
+        <span slot="blogUrl">{{ blogData.blogUrl }}</span>
+        <span slot="netName">{{ blogData.netName }}</span>
+        <span slot="skill">{{ blogData.skill }}</span>
+    </blog>
+</div>
+<!--第二步 使用<template></template>标签的方式定义了组件-->
+<template id="tmp">
+    <div>
+        <!-- 第四步：在组件模板中用<slot></slot>标签接收值 -->
+        <p>博客地址：<slot name="blogUrl"></slot></p>
+        <p>博客名：<slot name="netName"></slot></p>
+        <p>技能：<slot name="skill"></slot></p>
+    </div>
+</template>
+<script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
+<script>
+    var blog = {
+        template: '#tmp'
+    };
+    var vm1 = new Vue({
+        el: '#app1',
+        data: {
+            // 第一步：在Vue构造器里的data中给出了信息。
+            blogData: {
+                blogUrl: 'http://www.baidu.com',
+                netName: '百度',
+                skill: 'vue'
+            }
+        },
+        components: {
+            'blog': blog
+        }
+    });
+</script>
 </body>
 </html>
