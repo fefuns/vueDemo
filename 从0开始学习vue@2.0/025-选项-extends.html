@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>extends Option</title>
+</head>
+<body>
+相关文档：<br>
+<ul>
+    <li><a href="https://cn.vuejs.org/v2/api/#extends">选项/杂项  extends</a></li>
+</ul>
+<hr>
+<p>通过外部增加对象的方式，对构造器进行扩展。和mixins混合非常类似</p>
+<div id="app1">
+    {{ message }}
+    <p>
+        <button @click="add">add</button>
+    </p>
+</div>
+<p>
+    发现它跟 mixins 有几处不同的情况: <br>
+    1. 调用不同： mixins: [mixinsObj],   而   extends是   extends: extendsObj <br>
+    2. 顺序不同：mixins是 先执行混合对象里的钩子函数， 而extends 是先执行构造器里的钩子函数 <br>
+
+    他们相同的情况是，值为对象的选项，例如 methods, components 和 directives，将被混合为同一个对象。两个对象键名冲突时，比如下面的 methods里面的 add。
+    他们只会执行 构造器里的  add 方法。
+</p>
+<script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
+<script>
+    var extendsObj = {
+        created: function () {
+            console.log('我是被扩展出来的');
+        },
+        methods: {
+            add: function () {
+                console.log('我是被扩展出来的方法！');
+            }
+        }
+    }
+
+    var vm1 = new Vue({
+        el: '#app1',
+        data: {
+            message: 'hello Vue!'
+        },
+        created: function () {
+            console.log('我是构造器里的created')
+        },
+        methods: {
+            add: function () {
+                console.log('我是构造器里的方法');
+            }
+        },
+        // 在没有调用 Vue.extends 的时候继承 extendsObj
+        extends: extendsObj
+    });
+
+
+</script>
+</body>
+</html>
