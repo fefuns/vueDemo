@@ -3,7 +3,9 @@
     <img src="./assets/logo.png">
     <div>
       <router-link to="/">首页</router-link> 丨
-      <router-link to="/Hi">Hi页面</router-link> 丨
+      <router-link to="/hi">Hi页面</router-link> 丨
+      <router-link to="/hi/hi1">Hi页面1</router-link> 丨
+      <router-link to="/hi/hi2">Hi页面2</router-link> 丨
     </div>
     <router-view></router-view>
   </div>
