@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>路由开始基础demo</title>
+</head>
+<style>
+    .view {
+        border: 1px solid red;
+        height: 2000px;
+        position: relative;
+    }
+</style>
+<body>
+相关文档: <br>
+<ul>
+    <li><a href="https://cn.vuejs.org/v2/guide/routing.html#官方路由">Vue官网路由章节</a></li>
+    <li><a href="https://router.vuejs.org/zh-cn/installation.html">官方vue-router中文文档</a></li>
+    <li><a href="http://es6.ruanyifeng.com/">阮一峰ES6入门</a></li>
+    <li><a href="http://es6.ruanyifeng.com/#docs/let#const-命令">ES6 const命令简介</a></li>
+    <li><a href="http://es6.ruanyifeng.com/#docs/function#箭头函数">ES6 箭头函数</a></li>
+    <li><a href="http://www.tangshuang.net/3512.html#title-24-7">什么是router-link</a></li>
+    <li><a href="http://www.tangshuang.net/3512.html#title-24-3">什么是router-view</a></li>
+</ul>
+<p>自己的理解：滚动行为可能会用来处理这种需求。当我在一个新闻列表页浏览到了某一个新闻的时候，我点进去看了新闻的详细报道，然后点返回，会希望返回的时候滚动条不是在顶部，而是接着我之前浏览的那个位置，让我可以继续从那里浏览新闻列表</p>
+<br>
+<div id="app1">
+    <h1>滚动行为</h1>
+    <ul>
+        <li><router-link to="/">/</router-link></li>
+        <li><router-link to="/foo">/foo</router-link></li>
+        <li><router-link to="/bar">/bar</router-link></li>
+        <li><router-link to="/bar#anchor">/bar#anchor</router-link></li>
+    </ul>
+    <router-view class="view"></router-view>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
+<script src="https://cdn.bootcss.com/vue-router/2.5.3/vue-router.js"></script>
+<script>
+    // 0. 如果使用模块化机制编程，導入Vue和VueRouter，要调用 Vue.use(VueRouter)
+
+    // 1. 定义（路由）组件。
+    // 可以从其他文件 import 进来
+    const Home = { template: '<div>home</div>' }
+    const Foo = { template: '<div>foo</div>' }
+    const Bar = {
+        template: `
+            <div>
+                bar
+                <div style="height:500px"></div>
+                <p id="anchor">Anchor</p>
+            </div>
+        `
+    }
+
+    const scrollBehavior = (to, from, savedPosition) => {
+        if (savedPosition) {
+
+            return savedPosition
+        } else {
+            const position = {}
+
+            if (to.hash) {
+                position.selector = to.hash
+            }
+            if (to.matched.some(m => m.meta.scrollToTop)) {
+                position.x = 0
+                position.y = 0
+            }
+
+            return position
+        }
+    }
+
+    // 2. 定义路由
+    // 每个路由应该映射一个组件。其中'component'可以是通过 Vue.extend() 创建的组件构造器，或者，只是一个组件配置对象。
+    const routes = [
+        { path: '/', component: Home, meta: { scrollToTop: true }},
+        { path: '/foo', component: Foo },
+        { path: '/bar', component: Bar, meta: { scrollToTop: true }}
+    ]
+
+    // 3. 创建 router 实例，然后传 'router' 配置
+    // 还可以传别的配置参数
+    const router = new VueRouter({
+        scrollBehavior,
+        routes // (缩写) 相当于 routes: routes
+    })
+
+    // 4. 创建和挂载根实例。
+    // 记得要通过 router 配置参数注入路由，
+    // 从而让整个应用都有路由功能
+    const app = new Vue({
+        router
+    }).$mount('#app1')
+
+    // 现在，应用已经启动了！
+</script>
+</body>
+</html>
