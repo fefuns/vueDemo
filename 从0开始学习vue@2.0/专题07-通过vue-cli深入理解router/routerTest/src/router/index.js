@@ -20,15 +20,18 @@ export default new Router({
       // 路由名称
       name: 'Hello',
       // 对应的组件模板
-      component: Hello
+      components: {
+        default: Hello,
+        left: Hi1,
+        right: Hi2
+      }
     },{
       path: '/Hi',
-      component: Hi,
-      children: [
-        {path: '/', name: 'hi', component: Hi},
-        {path: 'hi1', name: 'hi1', component: Hi1},
-        {path: 'hi2', name: 'hi2', component: Hi2}
-      ]
+      components: {
+        default: Hello,
+        left: Hi2,
+        right: Hi1
+      }
 
     }
   ]
