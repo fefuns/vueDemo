@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>路由开始基础demo</title>
+</head>
+<style>
+    a.router-link-active {
+        color: #f66;
+    }
+    li.router-link-active a {
+        color: #f66;
+    }
+</style>
+<body>
+相关文档: <br>
+<ul>
+    <li><a href="https://cn.vuejs.org/v2/guide/routing.html#官方路由">Vue官网路由章节</a></li>
+    <li><a href="https://router.vuejs.org/zh-cn/installation.html">官方vue-router中文文档</a></li>
+    <li><a href="http://es6.ruanyifeng.com/">阮一峰ES6入门</a></li>
+    <li><a href="http://es6.ruanyifeng.com/#docs/let#const-命令">ES6 const命令简介</a></li>
+    <li><a href="http://es6.ruanyifeng.com/#docs/function#箭头函数">ES6 箭头函数</a></li>
+    <li><a href="http://www.tangshuang.net/3512.html#title-24-7">什么是router-link</a></li>
+    <li><a href="http://www.tangshuang.net/3512.html#title-24-3">什么是router-view</a></li>
+</ul>
+<br>
+<div id="app1">
+    <h1>当前菜单样式</h1>
+    <ul>
+        <li><router-link to="/">/</router-link></li>
+        <li><router-link to="/" exact>/ (exact match)</router-link></li>
+        <li><router-link to="/users">/users</router-link></li>
+        <li><router-link to="/users" exact>/users (exact match)</router-link></li>
+        <li><router-link to="/users/evan">/users/evan</router-link></li>
+        <li><router-link to="/users/evan#foo">/users/evan#foo</router-link></li>
+        <li>
+            <router-link :to="{ path: '/users/evan', query: { foo: 'bar' }}">
+                /users/evan?foo=bar
+            </router-link>
+        </li>
+        <li><!-- #635 -->
+            <router-link :to="{ name: 'user', params: { username: 'evan' }, query: { foo: 'bar' }}" exact>
+                /users/evan?foo=bar (named view + exact match)
+            </router-link>
+        </li>
+        <li>
+            <router-link :to="{ path: '/users/evan', query: { foo: 'bar', baz: 'qux' }}">
+                /users/evan?foo=bar&baz=qux
+            </router-link>
+        </li>
+        <li><router-link to="/about">/about</router-link></li>
+        <router-link tag="li" to="/about">
+            <a>/about (active class on outer element)</a>
+        </router-link>
+    </ul>
+    <router-view class="view"></router-view>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
+<script src="https://cdn.bootcss.com/vue-router/2.5.3/vue-router.js"></script>
+<script>
+    // 0. 如果使用模块化机制编程，導入Vue和VueRouter，要调用 Vue.use(VueRouter)
+
+    // 1. 定义（路由）组件。
+    // 可以从其他文件 import 进来
+    const Home = { template: '<div><h2>Home</h2></div>' }
+    const About = { template: '<div><h2>About</h2></div>' }
+
+    const Users = {
+        template: `
+    <div>
+      <h2>Users</h2>
+      <router-view></router-view>
+    </div>
+  `
+    }
+
+    const User = { template: '<div>{{ $route.params.username }}</div>' }
+
+
+    // 2. 定义路由
+    // 每个路由应该映射一个组件。其中'component'可以是通过 Vue.extend() 创建的组件构造器，或者，只是一个组件配置对象。
+    const routes = [
+        { path: '/', component: Home },
+        { path: '/about', component: About },
+        { path: '/users', component: Users,
+            children: [
+                { path: ':username', name: 'user', component: User }
+            ]
+        }
+    ]
+
+    // 3. 创建 router 实例，然后传 'router' 配置
+    // 还可以传别的配置参数
+    const router = new VueRouter({
+        routes // (缩写) 相当于 routes: routes
+    })
+
+    // 4. 创建和挂载根实例。
+    // 记得要通过 router 配置参数注入路由，
+    // 从而让整个应用都有路由功能
+    const app = new Vue({
+        router
+    }).$mount('#app1')
+
+    // 现在，应用已经启动了！
+</script>
+</body>
+</html>
