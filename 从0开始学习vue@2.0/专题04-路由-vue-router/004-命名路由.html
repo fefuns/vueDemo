@@ -16,39 +16,27 @@
 </ul>
 <br>
 <div id="app1">
-    <p>
-        <router-link to="/user/foo">/user/foo</router-link>
-        <router-link to="/user/foo/profile">/user/foo/profile</router-link>
-        <router-link to="/user/foo/posts">/user/foo/posts</router-link>
-    </p>
+    <h1>命名路由</h1>
+    <p>当前路由名称: {{ $route.name }}</p>
+    <ul>
+        <li><router-link :to="{ name: 'home' }">home</router-link></li>
+        <li><router-link :to="{ name: 'foo' }">foo</router-link></li>
+        <li><router-link :to="{ name: 'bar', params: {id: 123} }">bar</router-link></li>
+    </ul>
     <router-view></router-view>
 </div>
 <script src="https://cdn.bootcss.com/vue/2.3.2/vue.js"></script>
 <script src="https://cdn.bootcss.com/vue-router/2.5.3/vue-router.js"></script>
 <script>
-    const User = {
-        template: '<div class="user"><h2>User {{ $route.params.id }}</h2><router-view></router-view></div>'
-    }
-    const UserHome = {
-        template: '<div>Home</div>'
-    }
-    const UserProfile = {
-        template: '<div>Profile</div>'
-    }
-    const UserPosts = {
-        template: '<div>Posts</div>'
-    }
+    const Home = { template: '<div>This is Home</div>' }
+    const Foo = { template: '<div>This is Foo</div>' }
+    const Bar = { template: '<div>This is Bar {{ $route.params.id }}</div>' }
 
     const router = new VueRouter({
         routes: [
-            {
-                path: '/user/:id', component: User,
-                children: [
-                    {path: '', component: UserHome},
-                    {path: 'profile', component: UserProfile},
-                    {path: 'posts', component: UserPosts}
-                ]
-            }
+            { path: '/', name: 'home', component: Home },
+            { path: '/foo', name: 'foo', component: Foo },
+            { path: '/bar/:id', name: 'bar', component: Bar }
         ]
     })
 
