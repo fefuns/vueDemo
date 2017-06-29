@@ -16,7 +16,9 @@
 
 ### vuex专题
 
--  [01-basic](http://note.youdao.com/noteshare?id=39d0f4ccfb16349a776ddef82b39be7c&sub=E20F8911F2C9422A969BE3D2409CEAB8)
+- [01-basic](http://note.youdao.com/noteshare?id=39d0f4ccfb16349a776ddef82b39be7c&sub=E20F8911F2C9422A969BE3D2409CEAB8)
 
 - [02-state](http://note.youdao.com/noteshare?id=98ee028ce2584bfa543843a16f9d00f1&sub=444673AC7192454D8C7AEE3C75C8B840)
+
+- [03-mutations](http://note.youdao.com/noteshare?id=1f68232a54260e27e94a6f8b911486b3&sub=41AAF1A53C01418EA2570DA4B6E758B2)
 
