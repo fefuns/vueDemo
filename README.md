@@ -22,3 +22,5 @@
 
 - [03-mutations](http://note.youdao.com/noteshare?id=1f68232a54260e27e94a6f8b911486b3&sub=41AAF1A53C01418EA2570DA4B6E758B2)
 
+- [04-getters](http://note.youdao.com/noteshare?id=a1a32b81b8226b5d206334e02d23997f&sub=96F2F8242448456E862F68F0C498A71A)
+
